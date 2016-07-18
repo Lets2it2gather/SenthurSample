@@ -26,7 +26,7 @@ final class MongoDbService implements EmployeeService {
 	public EmployeeDTO create(EmployeeDTO employee) {
 		LOGGER.info("Creating a new employee entry with information: {}", employee);
 
-		Employee persisted = Employee.getBuilder().title(employee.getTitle()).description(employee.getName()).build();
+		Employee persisted = Employee.getBuilder().title(employee.getTitle()).name(employee.getName()).build();
 
 		persisted = repository.save(persisted);
 		LOGGER.info("Created a new employee entry with information: {}", persisted);
@@ -96,7 +96,7 @@ final class MongoDbService implements EmployeeService {
 
 		dto.setId(model.getId());
 		dto.setTitle(model.getTitle());
-		dto.setName(model.getDescription());
+		dto.setName(model.getName());
 
 		return dto;
 	}

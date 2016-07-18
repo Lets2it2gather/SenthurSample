@@ -8,7 +8,7 @@ import org.springframework.data.annotation.Id;
 
 final class Employee {
 
-    static final int MAX_LENGTH_DESCRIPTION = 500;
+    static final int MAX_LENGTH_NAME = 500;
     static final int MAX_LENGTH_TITLE = 100;
 
     @Id
@@ -21,7 +21,7 @@ final class Employee {
     public Employee() {}
 
     private Employee(Builder builder) {
-        this.name = builder.description;
+        this.name = builder.name;
         this.title = builder.title;
     }
 
@@ -33,7 +33,7 @@ final class Employee {
         return id;
     }
 
-    public String getDescription() {
+    public String getName() {
         return name;
     }
 
@@ -41,17 +41,17 @@ final class Employee {
         return title;
     }
 
-    public void update(String title, String description) {
-        checkTitleAndDescription(title, description);
+    public void update(String title, String name) {
+        checkTitleAndname(title, name);
 
         this.title = title;
-        this.name = description;
+        this.name = name;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "employee[id=%s, description=%s, title=%s]",
+                "employee[id=%s, name=%s, title=%s]",
                 this.id,
                 this.name,
                 this.title
@@ -64,14 +64,14 @@ final class Employee {
      */
     static class Builder {
 
-        private String description;
+        private String name;
 
         private String title;
 
         private Builder() {}
 
-        Builder description(String description) {
-            this.description = description;
+        Builder name(String name) {
+            this.name = name;
             return this;
         }
 
@@ -83,13 +83,13 @@ final class Employee {
         Employee build() {
             Employee build = new Employee(this);
 
-            build.checkTitleAndDescription(build.getTitle(), build.getDescription());
+            build.checkTitleAndname(build.getTitle(), build.getName());
 
             return build;
         }
     }
 
-    private void checkTitleAndDescription(String title, String description) {
+    private void checkTitleAndname(String title, String name) {
         notNull(title, "Title cannot be null");
         notEmpty(title, "Title cannot be empty");
         isTrue(title.length() <= MAX_LENGTH_TITLE,
@@ -97,10 +97,10 @@ final class Employee {
                 MAX_LENGTH_TITLE
         );
 
-        if (description != null) {
-            isTrue(description.length() <= MAX_LENGTH_DESCRIPTION,
-                    "Description cannot be longer than %d characters",
-                    MAX_LENGTH_DESCRIPTION
+        if (name != null) {
+            isTrue(name.length() <= MAX_LENGTH_NAME,
+                    "name cannot be longer than %d characters",
+                    MAX_LENGTH_NAME
             );
         }
     }

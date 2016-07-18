@@ -8,7 +8,7 @@ public final class EmployeeDTO {
 
     private String id;
 
-    @Size(max = Employee.MAX_LENGTH_DESCRIPTION)
+    @Size(max = Employee.MAX_LENGTH_NAME)
     private String name;
 
     @NotEmpty
@@ -35,8 +35,8 @@ public final class EmployeeDTO {
         this.id = id;
     }
 
-    public void setName(String description) {
-        this.name = description;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setTitle(String title) {
@@ -46,7 +46,7 @@ public final class EmployeeDTO {
     @Override
     public String toString() {
         return String.format(
-                "EmployeeDTO[id=%s, description=%s, title=%s]",
+                "EmployeeDTO[id=%s, name=%s, title=%s]",
                 this.id,
                 this.name,
                 this.title
